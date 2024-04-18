@@ -39,7 +39,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>custom-final-name</finalName>
+		<finalName>jeevan_demo</finalName>
 	</build>
 
 </project>
