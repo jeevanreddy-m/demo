@@ -22,15 +22,15 @@ jobs:
 
       - name: Terraform Import1
         run: terraform import azurerm_resource_group.rg /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/github-terraform-rg1
-        working-directory: ./terraform/config
+        working-directory: ./terraform
 
       - name: Terraform Import2
         run: terraform import azurerm_storage_account.STA /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/github-terraform-rg1/providers/Microsoft.Storage/storageAccounts/storagegithubtf
-        working-directory: ./terraform/config
+        working-directory: ./terraform
 
       - name: Terraform Plan
         run: terraform plan
-        working-directory: ./terraform/config
+        working-directory: ./terraform
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -39,7 +39,7 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: ./terraform/config
+        working-directory: ./terraform
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
