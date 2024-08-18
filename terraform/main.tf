@@ -6,25 +6,25 @@ terraform {
     key                  = "dev.terraform.tfstate"
   }
 }
-# module "RG" {
-#   source   = "./modules/RG" #A
-#   rgname   = var.rgname     #B
-#   location = var.location
-# }
-
-resource "azurerm_resource_group" "rg" {
-  name     = "github-terraform-rg1"
-  location = "East US"
+ module "RG" {
+  source   = "./modules/RG" #A
+   rgname   = var.rgname     #B
+  location = var.location
 }
 
+/* resource "azurerm_resource_group" "rg" {
+  name     = "github-terraform-rg1"
+  location = "East US"
+} */
 
-# module "SA" {
-#   source   = "./modules/StorageAccount"
-#   sname    = var.sname
-#   rgname   = var.rgname
-#   location = var.location
-# }
+ module "SA" {
+   source   = "./modules/StorageAccount"
+   sname    = var.sname
+   rgname   = var.rgname
+   location = var.location
+ }
 
+/*
 resource "azurerm_storage_account" "STA" {
   name                     = "storagegithubtf"
   resource_group_name      = "github-terraform-rg1"
@@ -35,4 +35,4 @@ resource "azurerm_storage_account" "STA" {
   tags = {
     environment = "dev"
   }
-}
+} */
