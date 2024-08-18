@@ -35,6 +35,9 @@ resource "azurerm_storage_account" "STA" {
   tags = {
     environment = "dev"
   }
+  depends_on = [
+      azurerm_resource_group.rg
+    ]
 }
 
 module "RG" {
