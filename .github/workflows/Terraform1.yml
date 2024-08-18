@@ -32,10 +32,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-        run: terraform -chdir=./../terraform init -backend-config="resource_group_name=github-terraform-rg1" \
-              -backend-config="storage_account_name=storagegithubtf" \
-              -backend-config="container_name=tfstate" \
-              -backend-config="key=terraform.tfstate"
+        run: terraform init
         working-directory: terraform
 
 #      - name: Terraform Import1
