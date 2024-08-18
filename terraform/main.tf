@@ -12,7 +12,7 @@ terraform {
 #   location = var.location
 # }
 
-resource "azurerm_resource_group" "rg" {
+/* resource "azurerm_resource_group" "rg" {
   name     = "github-terraform-rg1"
   location = "East US"
 }
@@ -38,7 +38,7 @@ resource "azurerm_storage_account" "STA" {
   depends_on = [
       azurerm_resource_group.rg
     ]
-}
+} */
 
 module "RG" {
     source   = "./modules/RG" #A
