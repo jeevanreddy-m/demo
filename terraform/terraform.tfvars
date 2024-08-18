@@ -1,3 +1,3 @@
-rgname   = "github-action"
+rgname   = "github-terraform-rg1"
 location = "East US"
-sname    = "devopsguru190"
+sname    = "storagegithubtf"
