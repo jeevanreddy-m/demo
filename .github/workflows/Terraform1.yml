@@ -27,6 +27,7 @@ jobs:
           client-id: "757bca65-3395-4054-990a-c40cb80b6108"
           tenant-id: "d9c74ae7-f659-4228-bd09-b0d5fdd6f16d"
           subscription-id: "9bf7ac78-0625-49e4-9fe2-4f36dd943a48"
+          auth-type: oidc
 
       - name: Terraform Init
         run: terraform init
