@@ -21,10 +21,10 @@ jobs:
         run: terraform init
 
       - name: Terraform Import1
-        run: terraform import azurerm_resource_group.rg/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/github-terraform-rg1
+        run: terraform import azurerm_resource_group.rg /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/github-terraform-rg1
 
       - name: Terraform Import2
-        run: terraform import azurerm_storage_account.STA/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/github-terraform-rg1/providers/Microsoft.Storage/storageAccounts/storagegithubtf
+        run: terraform import azurerm_storage_account.STA /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/github-terraform-rg1/providers/Microsoft.Storage/storageAccounts/storagegithubtf
 
       - name: Terraform Plan
         run: terraform plan
