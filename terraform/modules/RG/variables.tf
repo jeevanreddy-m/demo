@@ -1,4 +1,4 @@
-variable "rname1" {
+variable "rgname" {
   type = string
 }
 variable "location" {

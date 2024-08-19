@@ -42,6 +42,6 @@ resource "azurerm_storage_account" "STA" {
 
 module "RG" {
     source   = "./modules/RG" #A
-  rgname   = var.rname1    #B
+  rgname   = "extra-rg"    #B
   location = var.location
  }
