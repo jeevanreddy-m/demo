@@ -1,4 +1,4 @@
-name: Terraform Import and Apply ..
+name: Terraform create new infra
 
 on:
   workflow_dispatch:
