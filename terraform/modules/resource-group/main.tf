@@ -16,7 +16,7 @@ provider "azurerm" {
 ##########################################################
 resource "azurerm_resource_group" "rg" {
   #name     = "aa-${var.aa-vertical}-${var.aa-application}-${var.aa-sdlc-environment}-${var.aa-location}-rg"
-  name="github-terraform-rg1"
+  name = "github-terraform-rg1"
   location = var.aa-location
 
   tags = {

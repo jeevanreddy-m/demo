@@ -75,6 +75,7 @@ jobs:
   # generate the execution plan for terraform
       - name: Terraform Plan
         id: plancreation
+        working-directory: terraform
         run: |
           terraform plan -input=false -out=out.tfplan ${{ steps.planscript.outputs.destroy_status }} \
           -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
