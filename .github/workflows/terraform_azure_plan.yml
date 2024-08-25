@@ -98,7 +98,7 @@ jobs:
         run: |
           az storage blob upload --account-name ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }} \
           --container-name tfplan \
-          --file out.tfplan \
+          --file '/home/runner/work/demo/demo/terraform/out.tfplan' \
           --name ${{ steps.planscript.outputs.tfplan_file }} \
           --auth-mode key \
           --account-key ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
