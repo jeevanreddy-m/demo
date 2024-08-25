@@ -38,6 +38,7 @@ variable "aa-application" {
 
 variable "aa-location" {
   description = "The Azure region. Ex: centralus or eastus"
+  default = "eastus"
 }
 
 variable "aa-sdlc-environment" {
