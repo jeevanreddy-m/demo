@@ -50,6 +50,10 @@ az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --auth-mode key \
 --account-key ${AZ_TERRAFORM_STORAGE_KEY}
 
+WORKING_DIR="terraform/azure"
+# Navigate to the working directory
+cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
+
 # initialize terraform
 terraform init
 # validate terraform scripts
