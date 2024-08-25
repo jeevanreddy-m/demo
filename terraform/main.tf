@@ -39,7 +39,7 @@ module "resource-group" {
   aa-security = var.aa-security
   aa-rg-owner = var.aa-rg-owner
   aa-rg-own-oid = var.aa-rg-own-oid
-  aa-app-shortname = var.aa-shortname
+  aa-shortname = var.aa-shortname
   spnid = var.spnid
   owner-group-id = var.owner-group-id
   contrib-group-id = var.contrib-group-id
