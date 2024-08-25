@@ -77,7 +77,8 @@ jobs:
         id: plancreation
         working-directory: terraform
         run: |
-          terraform plan -input=false -out=out.tfplan ${{ steps.planscript.outputs.destroy_status }} \
+          terraform plan -input=false -var-file='/home/runner/work/demo/demo/terraform/azure/terraform.tfvars.json' \
+          -out=out.tfplan ${{ steps.planscript.outputs.destroy_status }} \
           -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
           -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
           -var='tenant_id=${{ secrets.FXD_SOAR_AZ_TENANT_ID }}' \
