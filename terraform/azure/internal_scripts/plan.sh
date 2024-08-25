@@ -50,7 +50,7 @@ az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --auth-mode key \
 --account-key ${AZ_TERRAFORM_STORAGE_KEY}
 
-WORKING_DIR="./terraform"
+WORKING_DIR="/home/runner/work/demo/demo/terraform"
 # Print the current working directory
 echo "Current working directory: $(pwd)"
 
