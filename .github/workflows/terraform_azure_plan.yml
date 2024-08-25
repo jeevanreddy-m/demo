@@ -87,7 +87,7 @@ jobs:
           
       - name: Check Plan File Exists
         run: |
-          ls -l out.tfplan
+          ls -l 
 
 # -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
 # -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
