@@ -50,7 +50,16 @@ az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --auth-mode key \
 --account-key ${AZ_TERRAFORM_STORAGE_KEY}
 
-WORKING_DIR="terraform"
+WORKING_DIR="./terraform"
+# Print the current working directory
+echo "Current working directory: $(pwd)"
+
+# List contents of the parent directory
+echo "Contents of the parent directory:"
+ls -l $(dirname "$WORKING_DIR")
+
+# Attempt to change directory
+cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
 # Navigate to the working directory
 cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
 
