@@ -79,14 +79,15 @@ jobs:
         run: |
           terraform plan -input=false -var-file='/home/runner/work/demo/demo/terraform/azure/terraform.tfvars.json' \
           -out=out.tfplan ${{ steps.planscript.outputs.destroy_status }} \
-          -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
-          -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
           -var='tenant_id=${{ secrets.FXD_SOAR_AZ_TENANT_ID }}' \
           -var='subscription_id=${{ secrets.FXD_SOAR_AZ_SUBSCRIPTION_ID }}' \
           -var='subscription_ba_id=${{ secrets.FXD_BA_AZ_SUBSCRIPTION_ID }}' \
           -var='client_id=${{ secrets.FXD_SOAR_AZ_USER }}' \
           -var='client_secret=${{ secrets.FXD_SOAR_AZ_PASSWORD }}'
 
+# -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
+# -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
+      
 # upload the plan
 # use the suffix printed in this step for the apply workflow input
       - name: Upload Plan
