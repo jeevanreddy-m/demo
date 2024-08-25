@@ -20,23 +20,34 @@ variable "client_secret" {
 }
 variable "rg_name" {
   description = "Resource group name to use/create."
+  sensitive = true
 }
 variable "rg_env" {
   description = "Resource group environment (e.g. dev)."
+  default="dev"
 }
 variable "rg_region" {
   description = "Resource group region (e.g. east)."
+  default="east"
 }
 variable "name_prefix" {
   description = "The unique name prefix for the resources being created."
+  type = string
+  default = null
 }
 variable "name_suffix" {
   description = "The unique name suffix for the resources being created."
+  type = string
+  default = null
 }
 variable "aa-subscription-id" {
+  description = "g1"
+  sensitive = true
 }
 
 variable "aa-tenant-id" {
+  description = "g1"
+  sensitive = true
 }
 
 variable "aa-rg-owner" {
@@ -70,10 +81,13 @@ variable "aa-location" {
 
 variable "aa-sdlc-environment" {
   description = "The Environment dev, test, stage, prod, prod-a, prod-b"
+  default = "dev"
 }
 
 variable "aa-vertical" {
   description = "The vertical. Ex: aot"
+  type = string
+  default = null
 }
 
 variable "aa-security" {
@@ -84,6 +98,8 @@ variable "aa-security" {
 
 variable "aa-shortname" {
   description = "The shortname for the application as listed in Archer"
+  type = string
+  default = null
 }
 variable "spnid" {
   type = string
