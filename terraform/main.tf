@@ -34,12 +34,12 @@ module "resource-group" {
   aa-costcenter = var.aa-costcenter
   aa-security = var.aa-security
   aa-rg-owner = var.aa-rg-owner
-  aa-rg-own-oid = var.aa-rg-own-oid
+  /*aa-rg-own-oid = var.aa-rg-own-oid*/
   aa-shortname = var.aa-shortname
-  spnid = var.spnid
-  owner-group-id = var.owner-group-id
-  contrib-group-id = var.contrib-group-id
-  reader-group-id = var.reader-group-id
+  /*spnid = var.spnid*/
+  /*owner-group-id = var.owner-group-id*/
+ /* contrib-group-id = var.contrib-group-id*/
+  /*reader-group-id = var.reader-group-id*/
   tenant_id = var.aa-tenant-id
   client_id = var.client_id
   client_secret = var.client_secret
