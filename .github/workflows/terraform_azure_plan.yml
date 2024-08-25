@@ -71,6 +71,10 @@ jobs:
           AZ_TENANT_ID: ${{ secrets.FXD_SOAR_AZ_TENANT_ID }}
           AZ_TERRAFORM_STORAGE_ACCOUNT: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }}
           AZ_TERRAFORM_STORAGE_KEY: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
+
+      - name: Check Plan File Exists
+        run: |
+          ls -l out.tfplan
   
   # generate the execution plan for terraform
       - name: Terraform Plan
@@ -87,7 +91,7 @@ jobs:
 
 # -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
 # -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
-      
+
 # upload the plan
 # use the suffix printed in this step for the apply workflow input
       - name: Upload Plan

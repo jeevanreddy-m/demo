@@ -73,4 +73,3 @@ echo "rg_environment_lower=${rg_environment_lower}" >> $GITHUB_OUTPUT
 echo "rg_region_lower=${rg_region_lower}" >> $GITHUB_OUTPUT
 echo "destroy_status=${destroy_status}" >> $GITHUB_OUTPUT
 echo "tfplan_file=${tfplan_file}" >> $GITHUB_OUTPUT
-echo "tfplan_file=${tfplan_file}" >> $GITHUB_OUTPUT
