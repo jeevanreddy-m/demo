@@ -1,22 +1,18 @@
 variable "tenant_id" {
   description = "Tenant ID for American Airlines account in Azure Active Directory."
-  sensitive = true
 }
 variable "subscription_id" {
   description = "The Azure Subscription ID."
-  sensitive = true
 }
-variable "subscription_ba_id" {
+/*variable "subscription_ba_id" {
   description = "The Azure Subscription ID for BA Team"
   sensitive = true
-}
+}*/
 variable "client_id" {
   description = "The client id of Service Principal. Used for connecting to Azure."
-  sensitive = true
 }
 variable "client_secret" {
   description = "The client secret of Service Principal. Used for connecting to Azure."
-  sensitive = true
 }
 variable "rg_name" {
   description = "Resource group name to use/create."
