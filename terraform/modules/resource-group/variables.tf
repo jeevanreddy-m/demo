@@ -5,9 +5,6 @@
 variable "aa-subscription-id" {
 }
 
-variable "aa-tenant-id" {
-}
-
 variable "aa-rg-owner" {
   description = "The corpaa user id of the Resource Group Owner Ex: 123456@corpaa.aa.com"
 }
