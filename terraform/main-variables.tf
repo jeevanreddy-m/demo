@@ -20,7 +20,8 @@ variable "client_secret" {
 }
 variable "rg_name" {
   description = "Resource group name to use/create."
-  sensitive = true
+  type = string
+  default = null
 }
 variable "rg_env" {
   description = "Resource group environment (e.g. dev)."
@@ -42,16 +43,17 @@ variable "name_suffix" {
 }
 variable "aa-subscription-id" {
   description = "g1"
-  sensitive = true
+  default = null
 }
 
 variable "aa-tenant-id" {
   description = "g1"
-  sensitive = true
+  default = null
 }
 
 variable "aa-rg-owner" {
   description = "The corpaa user id of the Resource Group Owner Ex: 123456@corpaa.aa.com"
+  default = null
 }
 
 variable "aa-rg-own-oid" {
@@ -73,10 +75,12 @@ variable "aa-costcenter" {
 
 variable "aa-application" {
   description = "The application name"
+  default = null
 }
 
 variable "aa-location" {
   description = "The Azure region. Ex: centralus or eastus"
+  default = null
 }
 
 variable "aa-sdlc-environment" {
