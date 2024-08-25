@@ -48,7 +48,6 @@ az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --name ${tfvars_file} \
 --file terraform.tfvars.json \
 --auth-mode key \
-
 --account-key ${AZ_TERRAFORM_STORAGE_KEY}
 
 # initialize terraform
