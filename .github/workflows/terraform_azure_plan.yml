@@ -72,10 +72,6 @@ jobs:
           AZ_TERRAFORM_STORAGE_ACCOUNT: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }}
           AZ_TERRAFORM_STORAGE_KEY: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
 
-      - name: Check Plan File Exists
-        run: |
-          ls -l out.tfplan
-  
   # generate the execution plan for terraform
       - name: Terraform Plan
         id: plancreation
@@ -88,6 +84,10 @@ jobs:
           -var='subscription_ba_id=${{ secrets.FXD_BA_AZ_SUBSCRIPTION_ID }}' \
           -var='client_id=${{ secrets.FXD_SOAR_AZ_USER }}' \
           -var='client_secret=${{ secrets.FXD_SOAR_AZ_PASSWORD }}'
+          
+      - name: Check Plan File Exists
+        run: |
+          ls -l out.tfplan
 
 # -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
 # -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
