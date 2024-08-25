@@ -7,17 +7,13 @@ provider "azuread" {
 # Configure the Azure Resource Manager provider version and service principal credentials
 provider "azurerm" {
   features {
-    key_vault {
-      recover_soft_deleted_key_vaults = true
-      purge_soft_delete_on_destroy = true
-    }
   }
   tenant_id = var.tenant_id
   subscription_id = var.subscription_id
   client_id = var.client_id
   client_secret = var.client_secret
 }
-# Configuring the Azure Resource Manager provider version and service principal credentials with different subscription
+/*# Configuring the Azure Resource Manager provider version and service principal credentials with different subscription
 provider "azurerm" {
   features {}
   alias = "ba"
@@ -25,7 +21,7 @@ provider "azurerm" {
   subscription_id = var.subscription_ba_id
   client_id = var.client_id
   client_secret = var.client_secret
-}
+}*/
 module "resource-group" {
   #source = "git@github.com:AAInternal/terraform.git//azure-modules/resource-group?ref=resource-group-v2.1.0"
   source   = "./modules/resource-group"
