@@ -53,6 +53,9 @@ jobs:
           terraform version
           az version
 
+      - name: Set execute permissions
+        run: chmod +x internal_scripts/plan.sh
+
 # set all environment variables needed
       - name: Run Plan Script
         id: planscript
