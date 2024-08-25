@@ -44,4 +44,7 @@ module "resource-group" {
   owner-group-id = var.owner-group-id
   contrib-group-id = var.contrib-group-id
   reader-group-id = var.reader-group-id
+  tenant_id = var.aa-tenant-id
+  client_id = var.client_id
+  client_secret = var.client_secret
 }
