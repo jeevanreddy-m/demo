@@ -1,45 +1,36 @@
-variable "tenant_id"
-{
+variable "tenant_id" {
   description = "Tenant ID for American Airlines account in Azure Active Directory."
   sensitive = true
 }
-variable "subscription_id"
-{
+variable "subscription_id" {
   description = "The Azure Subscription ID."
   sensitive = true
 }
-variable "subscription_ba_id"
-{
+variable "subscription_ba_id" {
   description = "The Azure Subscription ID for BA Team"
   sensitive = true
 }
-variable "client_id"
-{
+variable "client_id" {
   description = "The client id of Service Principal. Used for connecting to Azure."
   sensitive = true
 }
-variable "client_secret"
-{
+variable "client_secret" {
   description = "The client secret of Service Principal. Used for connecting to Azure."
-  sensitive = true}
-variable "rg_name"
-{
+  sensitive = true
+}
+variable "rg_name" {
   description = "Resource group name to use/create."
 }
-variable "rg_env"
-{
+variable "rg_env" {
   description = "Resource group environment (e.g. dev)."
 }
-variable "rg_region"
-{
+variable "rg_region" {
   description = "Resource group region (e.g. east)."
 }
-variable "name_prefix"
-{
+variable "name_prefix" {
   description = "The unique name prefix for the resources being created."
 }
-variable "name_suffix"
-{
+variable "name_suffix" {
   description = "The unique name suffix for the resources being created."
 }
 variable "aa-subscription-id" {
