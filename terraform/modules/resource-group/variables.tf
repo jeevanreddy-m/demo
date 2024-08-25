@@ -1,4 +1,4 @@
-######################################################
+/*######################################################
 #Input Variables
 ######################################################
 
@@ -34,11 +34,6 @@ variable "aa-costcenter" {
 
 variable "aa-application" {
   description = "The application name"
-}
-
-variable "aa-location" {
-  description = "The Azure region. Ex: centralus or eastus"
-  default = "eastus"
 }
 
 variable "aa-sdlc-environment" {
@@ -77,4 +72,9 @@ variable "reader-group-id" {
 variable "viewer-group-id" {
   type = string
   default = null
+}
+*/
+variable "aa_location" {
+  description = "The Azure region. Ex: centralus or eastus"
+  default = "eastus"
 }

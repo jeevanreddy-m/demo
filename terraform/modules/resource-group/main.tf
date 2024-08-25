@@ -19,9 +19,9 @@ provider "azurerm" {
 ##########################################################
 resource "azurerm_resource_group" "rg" {
   #name     = "aa-${var.aa-vertical}-${var.aa-application}-${var.aa-sdlc-environment}-${var.aa-location}-rg"
-  name = "github-terraform-rg1"
-  location = var.aa-location
-
+  name     = "github-terraform-rg1"
+  location = var.aa_location
+  /*
   tags = {
     aa-app-id           = var.aa-app-id
     aa-costcenter       = var.aa-costcenter
@@ -80,4 +80,8 @@ resource "azurerm_role_assignment" "gr-viewer" {
   scope                = azurerm_resource_group.rg.id
   role_definition_name = "AA-Viewer"
   principal_id         = var.viewer-group-id
+}
+
+}
+ */
 }

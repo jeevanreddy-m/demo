@@ -14,7 +14,7 @@ variable "client_id" {
 variable "client_secret" {
   description = "The client secret of Service Principal. Used for connecting to Azure."
 }
-variable "rg_name" {
+/*variable "rg_name" {
   description = "Resource group name to use/create."
   type = string
   default = null
@@ -72,13 +72,13 @@ variable "aa-costcenter" {
 variable "aa-application" {
   description = "The application name"
   default = null
-}
+}*/
 
-variable "aa-location" {
+variable "aa_location" {
   description = "The Azure region. Ex: centralus or eastus"
 }
 
-variable "aa-sdlc-environment" {
+/*variable "aa-sdlc-environment" {
   description = "The Environment dev, test, stage, prod, prod-a, prod-b"
   default = "dev"
 }
@@ -119,4 +119,4 @@ variable "reader-group-id" {
 variable "viewer-group-id" {
   type = string
   default = null
-}
+}*/

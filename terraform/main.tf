@@ -25,22 +25,22 @@ provider "azurerm" {
 module "resource-group" {
   #source = "git@github.com:AAInternal/terraform.git//azure-modules/resource-group?ref=resource-group-v2.1.0"
   source   = "./modules/resource-group"
-  aa-subscription-id = var.aa-subscription-id
+  /*aa-subscription-id = var.aa-subscription-id
   aa-vertical = var.aa-vertical
   aa-application = var.aa-application
   aa-sdlc-environment = var.aa-sdlc-environment
-  aa-location = var.aa-location
   aa-app-id = var.aa-app-id
   aa-costcenter = var.aa-costcenter
   aa-security = var.aa-security
   aa-rg-owner = var.aa-rg-owner
-  /*aa-rg-own-oid = var.aa-rg-own-oid*/
-  aa-shortname = var.aa-shortname
+  aa-rg-own-oid = var.aa-rg-own-oid
+  aa-shortname = var.aa-shortname*/
   /*spnid = var.spnid*/
   /*owner-group-id = var.owner-group-id*/
  /* contrib-group-id = var.contrib-group-id*/
   /*reader-group-id = var.reader-group-id*/
-  tenant_id = var.aa-tenant-id
+/*  tenant_id = var.aa-tenant-id
   client_id = var.client_id
-  client_secret = var.client_secret
+  client_secret = var.client_secret*/
+  aa-location = var.aa_location
 }
