@@ -64,6 +64,12 @@ terraform validate
 #terraform_variables_file="env-${TARGET_ENV}.tfvars"
 terraform_variables_file="terraform.tfvars.json"
 
+echo "Current working directory: $(pwd)"
+export TF_LOG=DEBUG
+terraform apply -auto-approve
+#terraform import module.resource-group.azurerm_resource_group.rg /subscriptions/9bf7ac78-0625-49e4-9fe2-4f36dd943a48/resourceGroups/github-terraform-rg1
+
+
 #function get_az_resource_name() {
 #
 #local ecommerce_tag_id=$1
@@ -136,7 +142,7 @@ terraform_variables_file="terraform.tfvars.json"
 #fi
 #}
 #
-echo "Current working directory: $(pwd)"
+#echo "Current working directory: $(pwd)"
 #terraform apply -auto-approve
 #terraform import module.resource-group.azurerm_resource_group.rg /subscriptions/9bf7ac78-0625-49e4-9fe2-4f36dd943a48/resourceGroups/github-terraform-rg1
 
