@@ -81,7 +81,7 @@ jobs:
               az storage blob upload --overwrite true \
               --account-name ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }} \
               --container-name tfstate \
-              --file terraform.tfstate \
+              --file '/home/runner/work/demo/demo/terraform/terraform.tfstate' \
               --name ${{ steps.importscript.outputs.tfstate_file }} \
               --auth-mode key \
               --account-key ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
