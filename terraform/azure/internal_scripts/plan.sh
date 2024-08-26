@@ -14,7 +14,8 @@ fi
 
 # set tf files
 tf_file_prefix="${rg_environment_lower}-${rg_region_lower}"
-tfstate_file="${tf_file_prefix}.tfstate"
+#tfstate_file="${tf_file_prefix}.tfstate"
+tfstate_file="dev-east.tfstate"
 tfvars_file="${tf_file_prefix}-tfvars.json"
 tfplan_file="${tf_file_prefix}-$(date +"%Y%m%dT%H%M%S")-${WORKFLOW_RUN_NUMBER}-${WORKFLOW_USER}${destroy_status}.tfplan"
 
