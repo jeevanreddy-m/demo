@@ -24,7 +24,7 @@ resource "azurerm_resource_group" "rg" {
   tags ={
     app-id= "app-id"
   }
-  timeouts {}
+  timeouts { }
   /*
   tags = {
     aa-app-id           = var.aa-app-id
