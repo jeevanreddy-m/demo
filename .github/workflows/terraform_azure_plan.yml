@@ -77,7 +77,7 @@ jobs:
         id:   plancreation
         working-directory: terraform
         run: |
-          terraform plan -input=false -var-file='/home/runner/work/demo/demo/terraform/azure/terraform.tfvars.json' \
+          terraform plan -input=false -var-file='/home/runner/work/demo/demo/terraform/terraform.tfvars.json' \
           -out=out.tfplan \
           -var='tenant_id=${{ secrets.FXD_SOAR_AZ_TENANT_ID }}' \
           -var='subscription_id=${{ secrets.FXD_SOAR_AZ_SUBSCRIPTION_ID }}' \

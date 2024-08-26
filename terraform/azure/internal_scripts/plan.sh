@@ -23,6 +23,13 @@ tfplan_file="${tf_file_prefix}-$(date +"%Y%m%dT%H%M%S")-${WORKFLOW_RUN_NUMBER}-$
 echo "The User is: ${AZ_USER} and password: is ${AZ_PASSWORD} and tenant is: ${AZ_TENANT_ID}"
 az login --service-principal --username ${AZ_USER} -p="${AZ_PASSWORD}" --tenant ${AZ_TENANT_ID}
 
+WORKING_DIR="/home/runner/work/demo/demo/terraform"
+# Print the current working directory
+echo "Current working directory: $(pwd)"
+
+# Attempt to change directory
+cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
+
 #Testing Eventhub access through github actions
 #az eventhubs eventhub show --resource-group ba-n-zeaus-orion-spl-rg --namespace-name ba-n-elm-001-ext-prmry-evhns --name n-fltplnnext_all_logs-evh
 
@@ -51,18 +58,6 @@ az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --auth-mode key \
 --account-key ${AZ_TERRAFORM_STORAGE_KEY}
 
-WORKING_DIR="/home/runner/work/demo/demo/terraform"
-# Print the current working directory
-echo "Current working directory: $(pwd)"
-
-# List contents of the parent directory
-echo "Contents of the parent directory:"
-ls -l $(dirname "$WORKING_DIR")
-
-# Attempt to change directory
-cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
-# Navigate to the working directory
-cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
 
 # initialize terraform
 terraform init
