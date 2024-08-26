@@ -136,7 +136,7 @@ terraform_variables_file="terraform.tfvars.json"
 #}
 #
 
-terraform import -var-file="terraform.tfvars.json" modules.resource-group.azurerm_resource_group.rg /subscriptions/9bf7ac78-0625-49e4-9fe2-4f36dd943a48/resourceGroups/github-terraform-rg1
+terraform import -var-file="terraform.tfvars.json" module.resource-group.azurerm_resource_group.rg /subscriptions/9bf7ac78-0625-49e4-9fe2-4f36dd943a48/resourceGroups/github-terraform-rg1
 
 ## lookup key vault
 #get_terraform_resource_path_by_ecommerce_tag "Microsoft.KeyVault" "vaults" $AZ_KEYVAULT_TAG
