@@ -62,7 +62,10 @@ jobs:
         # set all environment variables needed
           - name: Run Import Script
             id: importscript
-            run: internal_scripts/import.sh
+            run: |
+              set -x
+              bash internal_scripts/import.sh
+              set +x
             env:
                 PLAN_FILENAME: ${{ github.event.inputs.tfplan_file }}
                 AZ_USER: ${{ secrets.FXD_SOAR_AZ_USER }}
