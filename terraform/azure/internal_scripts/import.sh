@@ -166,7 +166,7 @@ terraform import -var-file="terraform.tfvars.json" module.resource-group.azurerm
 #
 ## import storage container
 #terraform import -var-file=$terraform_variables_file azurerm_storage_container.infrastructure_tfstate_container $storage_container_terraform_path
-
+echo "tf state file name : ${tfstate_file}"
 # set output variables
 echo "tf_file_prefix=${tf_file_prefix}" >> $GITHUB_OUTPUT
 echo "tfstate_file=${tfstate_file}" >> $GITHUB_OUTPUT
