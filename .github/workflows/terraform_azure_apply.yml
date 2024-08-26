@@ -67,7 +67,7 @@ jobs:
       # apply terraform
       - name: Terraform Apply
         working-directory: terraform
-        run: terraform apply ${{ steps.applyscript.outputs.tf_apply_file }} --auto-approve
+        run: terraform apply ${{ steps.applyscript.outputs.tf_apply_file }} 
 
       # always upload the latest tfstate file
       - name: Upload New State
