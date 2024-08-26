@@ -4,10 +4,6 @@ variable "tenant_id" {
 variable "subscription_id" {
   description = "The Azure Subscription ID."
 }
-variable "subscription_ba_id" {
-  description = "The Azure Subscription ID for BA Team"
-  sensitive = true
-}
 variable "client_id" {
   description = "The client id of Service Principal. Used for connecting to Azure."
 }
