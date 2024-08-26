@@ -88,10 +88,10 @@ jobs:
 
         # delete all tfplan blobs for this environment and region since everything worked , and country
         # all plans are old/invalid now since Azure state has changed
-          #- name: Delete Plans
-            #run: |
-              ##az storage blob delete-batch --account-name ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }} \
-              #--source tfplan \
-              #--pattern ${{ steps.importscript.outputs.tf_file_prefix }}* \
-              #--auth-mode key \
-              #--account-key ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
+          - name: Delete Plans
+            run: |
+              az storage blob delete-batch --account-name ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }} \
+              --source tfplan \
+              --pattern ${{ steps.importscript.outputs.tf_file_prefix }}* \
+              --auth-mode key \
+              --account-key ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}

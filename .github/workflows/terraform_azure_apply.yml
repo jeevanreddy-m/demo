@@ -51,7 +51,6 @@ jobs:
           az version
       - name: Set execute permissions
         run: chmod +x internal_scripts/apply.sh
-
     # set all environment variables needed
       - name: Run Apply Script
         id: applyscript
