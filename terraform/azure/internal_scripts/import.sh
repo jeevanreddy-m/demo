@@ -8,7 +8,8 @@ rg_environment_lower=$(echo ${region_env_lower} | grep -o '^[a-z]*')
 rg_region_lower=$(echo ${region_env_lower} | grep -o '[a-z]*$')
 # set the terraform state file
 tf_file_prefix="${rg_environment_lower}-${rg_region_lower}"
-tfstate_file="${tf_file_prefix}.tfstate"
+echo "before state file prefix: ${tf_file_prefix}"
+tfstate_file="dev-east.tfstate"
 tf_apply_file="out.tfplan"
 tfvars_file="dev-east-tfvars.json"
 
