@@ -9,9 +9,9 @@ rg_region_lower=$(echo ${region_env_lower} | grep -o '[a-z]*$')
 # set the terraform state file
 tf_file_prefix="${rg_environment_lower}-${rg_region_lower}"
 echo "before state file prefix: ${tf_file_prefix}"
-tfstate_file="dev-east.tfstate"
+tfstate_file="${tf_file_prefix}.tfstate"
 tf_apply_file="out.tfplan"
-tfvars_file="dev-east-tfvars.json"
+tfvars_file="${tf_file_prefix}-tfvars.json"
 
 # login into Azure
 az login --service-principal --username ${AZ_USER} -p="${AZ_PASSWORD}" --tenant ${AZ_TENANT_ID}
@@ -62,7 +62,7 @@ terraform validate
 
 
 #terraform_variables_file="env-${TARGET_ENV}.tfvars"
-terraform_variables_file="terraform.tfvars.json"
+#terraform_variables_file="terraform.tfvars.json"
 
 echo "Current working directory: $(pwd)"
 # export TF_LOG=DEBUG
