@@ -5,13 +5,17 @@
 #
 # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 
-name: "Terraform NonProd Azure Apply"
-run-name: "TF NONprod Azure Apply - ${{ inputs.tfplan_file }}"
+name: "Terraform NonProd Azure Migration"
+run-name: "TF NONprod Azure Migration - ${{ inputs.tfplan_file }}"
 
 on:
   # perform this workflow manually
   workflow_dispatch:
     inputs:
+      ran_plan_before_migrate:
+        description: "Confirmation (e.g. yes or no)"
+        required: true
+        default: "no"
       tfplan_file:
         description: "Plan filename"
         required: true
@@ -48,9 +52,12 @@ jobs:
           # print os, terraform, and azure cli version
           - name: Print Versions
             run: |
-        # uname -a
+              uname -a
               terraform version
               az version
+
+          - name: Set execute permissions
+            run: chmod +x internal_scripts/import.sh
 
         # set all environment variables needed
           - name: Run Import Script

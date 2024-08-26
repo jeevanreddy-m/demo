@@ -15,6 +15,12 @@ tfvars_file="dev-east-tfvars.json"
 # login into Azure
 az login --service-principal --username ${AZ_USER} -p="${AZ_PASSWORD}" --tenant ${AZ_TENANT_ID}
 
+WORKING_DIR="/home/runner/work/demo/demo/terraform"
+# Print the current working directory
+echo "Current working directory: $(pwd)"
+# Attempt to change directory
+cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
+
 # check if the terraform state file exists in Azure
 tfstate_file_status=$(az storage blob exists --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --container-name tfstate \
@@ -39,11 +45,6 @@ az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --auth-mode key \
 --account-key ${AZ_TERRAFORM_STORAGE_KEY}
 
-# initialize terraform
-terraform init
-# validate terraform scripts
-terraform validate
-
 # download file with environment/region specific variables
 # the file "terraform.tfvars.json" is automatically used by terraform plan
 az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
@@ -52,6 +53,12 @@ az storage blob download --account-name ${AZ_TERRAFORM_STORAGE_ACCOUNT} \
 --file terraform.tfvars.json \
 --auth-mode key \
 --account-key ${AZ_TERRAFORM_STORAGE_KEY}
+
+# initialize terraform
+terraform init
+# validate terraform scripts
+terraform validate
+
 
 #terraform_variables_file="env-${TARGET_ENV}.tfvars"
 terraform_variables_file="terraform.tfvars.json"
@@ -128,6 +135,9 @@ terraform_variables_file="terraform.tfvars.json"
 #fi
 #}
 #
+
+terraform import -var-file="terraform.tfvars.json" modules.resource-group.azurerm_resource_group.rg /subscriptions/9bf7ac78-0625-49e4-9fe2-4f36dd943a48/resourceGroups/github-terraform-rg1
+
 ## lookup key vault
 #get_terraform_resource_path_by_ecommerce_tag "Microsoft.KeyVault" "vaults" $AZ_KEYVAULT_TAG
 #keyvault_terraform_path=$retval

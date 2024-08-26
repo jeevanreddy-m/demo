@@ -58,7 +58,7 @@ jobs:
 
 # set all environment variables needed
       - name: Run Plan Script
-        id: planscript
+        id:   planscript
         run: internal_scripts/plan.sh
         env:
           WORKFLOW_USER: ${{ github.actor }}
@@ -74,7 +74,7 @@ jobs:
 
   # generate the execution plan for terraform
       - name: Terraform Plan
-        id: plancreation
+        id:   plancreation
         working-directory: terraform
         run: |
           terraform plan -input=false -var-file='/home/runner/work/demo/demo/terraform/azure/terraform.tfvars.json' \
@@ -85,10 +85,6 @@ jobs:
           -var='client_id=${{ secrets.FXD_SOAR_AZ_USER }}' \
           -var='client_secret=${{ secrets.FXD_SOAR_AZ_PASSWORD }}'
           
-      - name: Check Plan File Exists
-        run: |
-          ls -l 
-
 # -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
 # -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
 
