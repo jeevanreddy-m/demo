@@ -8,8 +8,17 @@ rg_environment_lower=$(echo ${region_env_lower} | grep -o '^[a-z]*')
 rg_region_lower=$(echo ${region_env_lower} | grep -o '[a-z]*$')
 # set the terraform state file
 tf_file_prefix="${rg_environment_lower}-${rg_region_lower}"
-tfstate_file="${tf_file_prefix}.tfstate"
+tf_file_prefix="dev-east"
+#tfstate_file="${tf_file_prefix}.tfstate"
+tfstate_file="dev-east.tfstate"
 tf_apply_file="out.tfplan"
+
+WORKING_DIR="/home/runner/work/demo/demo/terraform"
+# Print the current working directory
+echo "Current working directory: $(pwd)"
+
+# Attempt to change directory
+cd "$WORKING_DIR" || { echo "Failed to change directory to $WORKING_DIR"; exit 1; }
 
 # login into Azure
 az login --service-principal --username ${AZ_USER} -p="${AZ_PASSWORD}" --tenant ${AZ_TENANT_ID}
