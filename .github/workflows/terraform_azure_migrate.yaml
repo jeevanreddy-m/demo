@@ -49,12 +49,12 @@ jobs:
           - name: Setup Terraform
             uses: hashicorp/setup-terraform@v3
 
-          # print os, terraform, and azure cli version
-          - name: Print Versions
-            run: |
-              uname -a
-              terraform version
-              az version
+#          # print os, terraform, and azure cli version
+#          - name: Print Versions
+#            run: |
+#              uname -a
+#              terraform version
+#              az version
 
           - name: Set execute permissions
             run: chmod +x internal_scripts/import.sh
