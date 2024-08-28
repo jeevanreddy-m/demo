@@ -78,3 +78,5 @@ variable "aa_location" {
   description = "The Azure region. Ex: centralus or eastus"
   default = "eastus"
 }
+variable "aa-subscription-id" {
+}
