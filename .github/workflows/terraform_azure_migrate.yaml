@@ -1,0 +1,97 @@
+# This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
+# `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
+# to the master branch, `terraform apply` will be executed.
+#
+# Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
+
+name: "Terraform NonProd Azure Migration"
+run-name: "TF NONprod Azure Migration - ${{ inputs.tfplan_file }}"
+
+on:
+  # perform this workflow manually
+  workflow_dispatch:
+    inputs:
+      ran_plan_before_migrate:
+        description: "Confirmation (e.g. yes or no)"
+        required: true
+        default: "no"
+      tfplan_file:
+        description: "Plan filename"
+        required: true
+
+
+jobs:
+##################################################
+# Seperate Plan into jobs that allow for:
+# 1. Determining environment (prod / nonprod)
+# 2. Approving change
+# 3. Performing Implementation Steps
+#
+# Note: Use shell script action and outputs
+# instead of multiple steps
+##################################################
+  migrate:
+    name: "Migrate"
+    runs-on: ubuntu-latest
+    environment: nonprod
+    defaults:
+      run:
+        shell: bash
+        working-directory: terraform/azure
+
+    steps:
+        # checkout code
+          - name: Checkout Code
+            uses: actions/checkout@v4
+
+          # setup terraform for this script
+          - name: Setup Terraform
+            uses: hashicorp/setup-terraform@v3
+
+#          # print os, terraform, and azure cli version
+#          - name: Print Versions
+#            run: |
+#              uname -a
+#              terraform version
+#              az version
+
+          - name: Set execute permissions
+            run: chmod +x internal_scripts/import.sh
+
+        # set all environment variables needed
+          - name: Run Import Script
+            id: importscript
+            run: |
+              set -x
+              bash internal_scripts/import.sh
+              set +x
+            env:
+                PLAN_FILENAME: ${{ github.event.inputs.tfplan_file }}
+                AZ_USER: ${{ secrets.FXD_SOAR_AZ_USER }}
+                AZ_PASSWORD: ${{ secrets.FXD_SOAR_AZ_PASSWORD }}
+                AZ_TENANT_ID: ${{ secrets.FXD_SOAR_AZ_TENANT_ID }}
+                AZ_TERRAFORM_STORAGE_ACCOUNT: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }}
+                AZ_TERRAFORM_STORAGE_KEY: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
+
+          # always upload the latest tfstate file
+          - name: Upload New State
+            if: always()
+            run: |
+              az storage blob upload --overwrite true \
+              --account-name ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }} \
+              --container-name tfstate \
+              --file '/home/runner/work/demo/demo/terraform/terraform.tfstate' \
+              --name ${{ steps.importscript.outputs.tfstate_file }} \
+              --auth-mode key \
+              --account-key ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
+
+        # delete all tfplan blobs for this environment and region since everything worked , and country
+        # all plans are old/invalid now since Azure state has changed
+          - name: Delete Plans
+            run: |
+              az storage blob delete-batch --account-name ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }} \
+              --source tfplan \
+              --pattern ${{ steps.importscript.outputs.tf_file_prefix }}* \
+              --auth-mode key \
+              --account-key ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
