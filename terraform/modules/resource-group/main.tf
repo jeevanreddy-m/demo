@@ -21,9 +21,6 @@ resource "azurerm_resource_group" "rg" {
   #name     = "aa-${var.aa-vertical}-${var.aa-application}-${var.aa-sdlc-environment}-${var.aa-location}-rg"
   name     = "github-terraform-rg1"
   location = var.aa_location
-  tags ={
-    app-id= "app-id"
-  }
   timeouts { }
   /*
   tags = {
