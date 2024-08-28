@@ -1,19 +1,17 @@
 # Configure the Azure Active Directory provider version and service principal credentials
-/*provider "azuread" {
-  alias          = "ad"
+provider "azuread" {
   tenant_id = var.tenant_id
   client_id = var.client_id
   client_secret = var.client_secret
-}*/
+}
 # Configure the Azure Resource Manager provider version and service principal credentials
 provider "azurerm" {
-  /*alias          = "arm"*/
   features {
   }
   tenant_id = var.tenant_id
   subscription_id = var.subscription_id
-  /*client_id = var.client_id
-  client_secret = var.client_secret*/
+  client_id = var.client_id
+  client_secret = var.client_secret
 }
 /*# Configuring the Azure Resource Manager provider version and service principal credentials with different subscription
 provider "azurerm" {
@@ -24,12 +22,9 @@ provider "azurerm" {
   client_id = var.client_id
   client_secret = var.client_secret
 }*/
-module "resource-group" {
-  /*providers = {
-    azurerm = azurerm.arm
-  }*/
+resource "resource-group"  rg{
   #source = "git@github.com:AAInternal/terraform.git//azure-modules/resource-group?ref=resource-group-v2.1.0"
-  source   = "./modules/resource-group"
+  #source   = "./modules/resource-group"
   /*aa-subscription-id = var.aa-subscription-id
   aa-vertical = var.aa-vertical
   aa-application = var.aa-application
@@ -49,4 +44,7 @@ module "resource-group" {
   client_secret = var.client_secret*/
   aa-subscription-id = var.subscription_id
   aa_location = var.aa_location
+  tags ={
+    app-id= "app123"
+  }
 }

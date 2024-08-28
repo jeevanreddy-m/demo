@@ -10,6 +10,7 @@ variable "client_id" {
 variable "client_secret" {
   description = "The client secret of Service Principal. Used for connecting to Azure."
 }
+
 /*variable "rg_name" {
   description = "Resource group name to use/create."
   type = string

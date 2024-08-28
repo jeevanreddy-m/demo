@@ -1,17 +1,19 @@
 
-terraform {
-  required_providers {
-    azuread = {
-
-    }
-  }
+/*provider "azuread"{
+  tenant_id = var.tenant_id
+  client_id = var.client_id
+  client_secret = var.client_secret
 }
+
 provider "azurerm" {
-  subscription_id =var.aa-subscription-id
+  subscription_id = var.aa-subscription-id
+  tenant_id = var.tenant_id
+  client_id = var.client_id
+  client_secret = var.client_secret
   features {
   }
 }
-
+*/
 ##########################################################
 #Resource group Creation
 ##########################################################
@@ -22,7 +24,6 @@ resource "azurerm_resource_group" "rg" {
   tags ={
     app-id= "app-id"
   }
-  timeouts { }
   /*
   tags = {
     aa-app-id           = var.aa-app-id
