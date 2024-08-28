@@ -1,0 +1,106 @@
+# This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
+# `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
+# to the master branch, `terraform apply` will be executed.
+#
+# Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
+
+name: "Terraform NonProd Azure Plan"
+run-name: "TF NONprod Azure Plan - ${{ inputs.rg_environment }} ${{ inputs.rg_region }} ${{ inputs.plan_destroy_status && format('({0})',inputs.plan_destroy_status) || format('') }}"
+
+on:
+  workflow_dispatch: # perform this workflow manually
+    inputs:
+      rg_environment:
+        description: "Environment (e.g. dev or test or stage)"
+        required: true
+        default: "dev"
+      rg_region:
+        description: "Region (e.g. east or west)"
+        required: true
+        default: "east"
+      plan_destroy_status:
+        description: 'Type "destroy" to perform destroy'
+        required: false
+
+jobs:
+
+  perform-plan:
+    name: "Perform Plan"
+# needs: approve-plan
+    runs-on: ubuntu-latest
+# the environment will change based the user input
+# environment: ${{ needs.init-plan.outputs.perform_environment }}
+    environment: nonprod
+    defaults:
+      run:
+        shell: bash
+        working-directory: terraform/azure
+
+    steps:
+  # checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+  
+  # setup terraform for this script
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+  
+  # print os, terraform, and azure cli version
+      - name: Print Versions
+        run: |
+          uname -a
+          terraform version
+          az version
+
+      - name: Set execute permissions
+        run: chmod +x internal_scripts/plan.sh
+
+# set all environment variables needed
+      - name: Run Plan Script
+        id:   planscript
+        run: internal_scripts/plan.sh
+        env:
+          WORKFLOW_USER: ${{ github.actor }}
+          WORKFLOW_RUN_NUMBER: ${{ github.run_number }}
+          RG_ENVIRONMENT: ${{ github.event.inputs.rg_environment }}
+          RG_REGION: ${{ github.event.inputs.rg_region }}
+          PLAN_DESTROY_STATUS: ${{ github.event.inputs.plan_destroy_status }}
+          AZ_USER: ${{ secrets.FXD_SOAR_AZ_USER }}
+          AZ_PASSWORD: ${{ secrets.FXD_SOAR_AZ_PASSWORD }}
+          AZ_TENANT_ID: ${{ secrets.FXD_SOAR_AZ_TENANT_ID }}
+          AZ_TERRAFORM_STORAGE_ACCOUNT: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }}
+          AZ_TERRAFORM_STORAGE_KEY: ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
+
+  # generate the execution plan for terraform
+      - name: Terraform Plan
+        id:   plancreation
+        working-directory: terraform
+        run: |
+          terraform plan -input=false -var-file='/home/runner/work/demo/demo/terraform/terraform.tfvars.json' \
+          -out=out.tfplan \
+          -var='tenant_id=${{ secrets.FXD_SOAR_AZ_TENANT_ID }}' \
+          -var='subscription_id=${{ secrets.FXD_SOAR_AZ_SUBSCRIPTION_ID }}' \
+          -var='client_id=${{ secrets.FXD_SOAR_AZ_USER }}' \
+          -var='client_secret=${{ secrets.FXD_SOAR_AZ_PASSWORD }}'
+          
+# -var='rg_env=${{ steps.planscript.outputs.rg_environment_lower }}' \
+# -var='rg_region=${{ steps.planscript.outputs.rg_region_lower }}' \
+# -var='subscription_ba_id=${{ secrets.FXD_BA_AZ_SUBSCRIPTION_ID }}' \
+
+# upload the plan
+# use the suffix printed in this step for the apply workflow input
+      - name: Upload Plan
+        run: |
+          az storage blob upload --account-name ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_ACCOUNT }} \
+          --container-name tfplan \
+          --file '/home/runner/work/demo/demo/terraform/out.tfplan' \
+          --name ${{ steps.planscript.outputs.tfplan_file }} \
+          --auth-mode key \
+          --account-key ${{ secrets.FXD_SOAR_AZ_TERRAFORM_STORAGE_KEY }}
+
+# display the file to apply apply
+      - name: TERRAFORM PLAN FILENAME
+        run: |
+          echo ${{ steps.planscript.outputs.tfplan_file }}
+          echo Use this filename for Import or Apply Workflow
